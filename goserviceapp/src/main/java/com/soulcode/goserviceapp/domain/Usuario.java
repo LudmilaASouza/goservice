@@ -10,11 +10,11 @@ import java.util.Objects;
 
 @Entity  // É utilizada para informar que uma classe também é uma entidade.
 // A part disso, a JPA estabelecerá a ligação entre a entidade e uma tabela de mesmo nome no banco de dados, onde os dados de objetos desse tipo poderão ser persistidos.
-@Table(name = "usuarios")
+@Table(name = "usuarios") //Personalizar o nome da tabela
 public class Usuario implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id //Chave primária obrigatória
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//Autoincremento
     private Long id;
 
     @Column(nullable = false, length = 100)
@@ -34,6 +34,7 @@ public class Usuario implements UserDetails {
     private Perfil perfil;
 
     public Usuario(){
+
         this.habilitado = true;
     }
 
@@ -155,8 +156,14 @@ public class Usuario implements UserDetails {
     }
 
     @Override
-    public boolean equals(Object obj) {
-
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id,usuario.id) &&
+                Objects.equals(nome,usuario.nome) &&
+                Objects.equals(email,usuario.email) &&
+                Objects.equals(senha,usuario.senha) &&
+                perfil == usuario.perfil ;
     }
 }
