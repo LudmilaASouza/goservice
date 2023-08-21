@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Cliente extends Usuario {
 
     private String telefone;
