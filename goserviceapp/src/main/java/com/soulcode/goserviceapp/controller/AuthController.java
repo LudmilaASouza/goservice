@@ -19,4 +19,9 @@ public class AuthController {
         return "signup";
     }
 
+    @GetMapping(value="/password/new")
+    public String alterarSenha() {
+        return "alterarSenha";
+    }
+
 }
