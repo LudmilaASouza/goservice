@@ -26,9 +26,9 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Usuario findById(Long id){
+    public Usuario findById(Long id) {
         Optional<Usuario> result = usuarioRepository.findById(id);
-        if(result.isPresent()) {
+        if (result.isPresent()) {
             return result.get();
         }
         throw new UsuarioNaoEncontradoException();
