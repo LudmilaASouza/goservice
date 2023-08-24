@@ -21,7 +21,7 @@ public class Prestador extends Usuario {
 
     @ManyToMany
     @JoinTable(
-            name="prestadores_servico",
+            name="prestadores_servicos",
             joinColumns= @JoinColumn(name="prestador_id"),
             inverseJoinColumns = @JoinColumn(name= "servico_id")
     )

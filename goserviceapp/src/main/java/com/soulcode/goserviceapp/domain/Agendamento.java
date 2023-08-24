@@ -50,7 +50,7 @@ public class Agendamento {
     @Column(nullable = false)
     private LocalDateTime dataHoraRegistro;
 
-    public Agendamento(Long id) {
+    public Agendamento() {
         this.statusAgendamento = StatusAgendamento.AGUARDANDO_CONFIRMACAO;
     }
 
