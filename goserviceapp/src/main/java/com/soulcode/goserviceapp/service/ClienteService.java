@@ -2,6 +2,8 @@ package com.soulcode.goserviceapp.service;
 
 import com.soulcode.goserviceapp.domain.Cliente;
 import com.soulcode.goserviceapp.repository.ClienteRepository;
+import com.soulcode.goserviceapp.service.exceptions.UsuarioNaoAutenticadoException;
+import com.soulcode.goserviceapp.service.exceptions.UsuarioNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class ClienteService {
         if(cliente.isPresent()){
             return cliente.get();
         } else {
-            throw new RuntimeException("Cliente não encontrado.");
+            throw new UsuarioNaoEncontradoException("Cliente não encontrado.");
         }
     }
 
@@ -40,10 +42,10 @@ public class ClienteService {
             if(cliente.isPresent()){
                 return cliente.get();
             } else {
-                throw new RuntimeException("Cliente não foi entrado.");
+                throw new UsuarioNaoEncontradoException("Cliente não encontrado.");
             }
         } else {
-            throw new RuntimeException("Cliente não autenticado.");
+            throw new UsuarioNaoAutenticadoException("Cliente não autenticado.");
         }
     }
 }

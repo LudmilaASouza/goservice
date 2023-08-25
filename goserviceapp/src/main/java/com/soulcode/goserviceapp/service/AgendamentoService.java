@@ -6,6 +6,8 @@ import com.soulcode.goserviceapp.domain.Prestador;
 import com.soulcode.goserviceapp.domain.Servico;
 import com.soulcode.goserviceapp.domain.enums.StatusAgendamento;
 import com.soulcode.goserviceapp.repository.AgendamentoRepository;
+import com.soulcode.goserviceapp.service.exceptions.AgendamentoNaoEncontradoException;
+import com.soulcode.goserviceapp.service.exceptions.StatusAgendamentoImutavelException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -35,7 +37,7 @@ public class AgendamentoService {
         if (agendamento.isPresent()) {
             return agendamento.get();
         } else {
-            throw new RuntimeException("Agendamento não encontrado.");
+            throw new AgendamentoNaoEncontradoException();
         }
     }
 
@@ -70,7 +72,7 @@ public class AgendamentoService {
             agendamentoRepository.save(agendamento);
             return;
         }
-        throw new RuntimeException("Agendamento imutável.");
+        throw new StatusAgendamentoImutavelException();
     }
 
     public void confirmAgendaPrestador(Authentication authentication, Long id){
@@ -81,7 +83,7 @@ public class AgendamentoService {
             agendamentoRepository.save(agendamento);
             return;
         }
-        throw new RuntimeException("Agendamento imutável.");
+        throw new StatusAgendamentoImutavelException();
     }
 
     public void cancelAgendaCliente(Authentication authentication, Long id){
@@ -92,7 +94,7 @@ public class AgendamentoService {
             agendamentoRepository.save(agendamento);
             return;
         }
-        throw new RuntimeException("Agendamento imutável.");
+        throw new StatusAgendamentoImutavelException();
     }
 
     public void confirmAgendaCliente(Authentication authentication, Long id){
@@ -103,7 +105,7 @@ public class AgendamentoService {
             agendamentoRepository.save(agendamento);
             return;
         }
-        throw new RuntimeException("Agendamento imutável.");
+        throw new StatusAgendamentoImutavelException();
     }
 
 }
