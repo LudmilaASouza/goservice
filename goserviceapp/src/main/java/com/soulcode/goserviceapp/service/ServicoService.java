@@ -45,4 +45,8 @@ public class ServicoService {
         return servicoRepository.save(servico);
     }
 
+    public List<Servico> findByPrestadorEmail(String email){
+        return servicoRepository.findByPrestadorEmail(email);
+    }
+
 }
