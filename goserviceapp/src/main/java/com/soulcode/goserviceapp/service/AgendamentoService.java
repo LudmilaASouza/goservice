@@ -97,10 +97,11 @@ public class AgendamentoService {
         throw new StatusAgendamentoImutavelException();
     }
 
-    public void confirmAgendaCliente(Authentication authentication, Long id){
+
+    public void completeAgenda(Authentication authentication, Long id){
         Cliente cliente = clienteService.findAuthenticated(authentication);
         Agendamento agendamento = findById(id);
-        if(agendamento.getStatusAgendamento().equals(StatusAgendamento.CONFIRMADO)){
+        if (agendamento.getStatusAgendamento().equals(StatusAgendamento.CONFIRMADO)){
             agendamento.setStatusAgendamento(StatusAgendamento.CONCLUIDO);
             agendamentoRepository.save(agendamento);
             return;
