@@ -75,4 +75,5 @@ public class UsuarioLog {
     public void setDataLog(LocalDateTime dataLog) {
         this.dataLog = dataLog;
     }
+
 }

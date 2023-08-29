@@ -102,4 +102,13 @@ public class UsuarioService {
         }
         throw new UsuarioNaoEncontradoException();
     }
+
+    public Usuario findByEmail(String email){
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        if (usuario.isPresent()){
+            return usuario.get();
+        }
+        throw new UsuarioNaoEncontradoException();
+    }
+    
 }
