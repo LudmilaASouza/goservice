@@ -4,7 +4,9 @@ import com.soulcode.goserviceapp.domain.enums.StatusAgendamento;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,7 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "agendamento")
-public class Agendamento {
+public class Agendamento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
