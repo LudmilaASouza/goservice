@@ -25,4 +25,4 @@ VALUES
     (5, 5),
     (7, 5);
 
-
+SELECT perfil, COUNT(perfil) FROM usuarios GROUP BY perfil;

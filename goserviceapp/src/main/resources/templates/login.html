@@ -1,6 +1,7 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content}, ~{::#rodape})">
 <head>
+
     <title>Login | GoService</title>
 </head>
 <body>
@@ -8,6 +9,8 @@
 <main id="content" class="d-flex justify-content-center align-items-center" style="min-height: 100vh">
     <div style="width: 22rem">
         <form method="post" th:action="@{/auth/login}">
+
+            <img class="logo" id="logo-login" align-items-center justify-content-center th:src="@{/assets/img/logos/3.png}">
             <h1 class="h3 mb-3 fw-normal text-center">Login | GoService</h1>
 
             <div th:if="${successMessage != null}" th:text="${successMessage}" class="alert alert-success" role="alert"></div>
@@ -33,6 +36,8 @@
         </div>
     </div>
 </main>
+
+<footer id="rodape"></footer>
 
 </body>
 </html>
