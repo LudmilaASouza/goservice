@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content})">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: layout(~{::title}, ~{::#content}, ~{::#rodape})">
 <head>
     <meta charset="UTF-8">
     <title>Cadastro | GoService</title>
@@ -56,5 +56,9 @@
         });
     </script>
 </main>
+
+<footer id="rodape">
+</footer>
+
 </body>
 </html>
