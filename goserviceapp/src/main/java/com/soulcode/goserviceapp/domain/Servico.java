@@ -13,12 +13,15 @@ public class Servico implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank(message="O nome do serviço não pode ser vazio.")
     @Column(nullable=false, length =100)
     private String nome;
+
     @NotBlank(message="A descrição do serviço não pode ser vazia.")
     @Column(nullable=false)
     private String descricao;
+
     @NotBlank(message="A categoria do serviço não pode ser vazia.")
     @Column(nullable=false)
     private String categoria;

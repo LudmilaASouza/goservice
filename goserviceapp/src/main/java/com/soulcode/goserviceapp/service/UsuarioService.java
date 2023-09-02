@@ -7,10 +7,12 @@ import com.soulcode.goserviceapp.domain.Usuario;
 import com.soulcode.goserviceapp.repository.UsuarioRepository;
 import com.soulcode.goserviceapp.service.exceptions.UsuarioNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,14 +25,33 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder encoder;
 
+
+
+    //@Cacheable(cacheNames = "redisCache")
+    //System.err.println("BUSCANDO NO BANCO DE DADOS...");
+
+
+
+
     public List<Usuario> findAll() {
+
         return usuarioRepository.findAll();
     }
+
 
     public Usuario findById(Long id) {
         Optional<Usuario> result = usuarioRepository.findById(id);
         if (result.isPresent()) {
             return result.get();
+        }
+        throw new UsuarioNaoEncontradoException();
+    }
+
+
+    public Usuario findByEmail(String email){
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        if (usuario.isPresent()){
+            return usuario.get();
         }
         throw new UsuarioNaoEncontradoException();
     }
@@ -103,12 +124,4 @@ public class UsuarioService {
         throw new UsuarioNaoEncontradoException();
     }
 
-    public Usuario findByEmail(String email){
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
-        if (usuario.isPresent()){
-            return usuario.get();
-        }
-        throw new UsuarioNaoEncontradoException();
-    }
-    
 }
