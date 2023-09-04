@@ -42,6 +42,15 @@ public class AgendamentoService {
         }
     }
 
+//    #Task
+    public List<Agendamento> buscarPorPeriodo(LocalDate dataInicio, LocalDate dataFim, Authentication authentication) {
+        Prestador prestador = prestadorService.findAuthenticated(authentication);
+        if (dataInicio == null || dataFim == null) {
+            throw new RuntimeException();
+        }
+        return agendamentoRepository.findByDataAgendamentoBetween(dataInicio, dataFim, prestador.getId());
+    }
+
     public Agendamento create(Authentication authentication, Long servicoId, Long prestadorId, LocalDate data, LocalTime hora){
         Cliente cliente = clienteService.findAuthenticated(authentication);
         Prestador prestador = prestadorService.findById(prestadorId);

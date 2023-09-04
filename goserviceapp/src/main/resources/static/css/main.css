@@ -12,7 +12,19 @@
    height: 60px;
 }
 
-#logo-login{
-    display:flex;
-    height: 120px;
+#logo-login, #logo-signup{
+    height: 135px;
+    transition:all 0.5s;
+}
+
+#logo-login:hover{
+    scale: 1.15;
+}
+
+#logo-signup:hover{
+    scale: 1.15;
+}
+
+#dataFim, #dataInicio {
+    width: 220px;
 }
