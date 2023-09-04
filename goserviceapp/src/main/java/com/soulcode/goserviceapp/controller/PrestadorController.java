@@ -9,6 +9,8 @@ import com.soulcode.goserviceapp.service.ServicoService;
 import com.soulcode.goserviceapp.service.exceptions.*;
 import org.apache.catalina.authenticator.SpnegoAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -135,6 +138,23 @@ public class PrestadorController {
             attributes.addFlashAttribute("errorMessage", ex.getMessage());
         } catch (Exception ex) {
             attributes.addFlashAttribute("errorMessage", "Erro ao confirmar agendamento.");
+        }
+        return "redirect:/prestador/agenda";
+    }
+//
+//    Task
+    @PostMapping(value="agenda/buscarPorData")
+    public String buscarPorData( @RequestParam (required = false) LocalDate dataInicio,@RequestParam (required = false) LocalDate dataFim,
+    Authentication authentication,RedirectAttributes attributes){
+        try{
+            List<Agendamento> agendamentos = agendamentoService.buscarPorPeriodo(dataInicio, dataFim, authentication);
+            attributes.addFlashAttribute("agendamentosPorData", agendamentos);
+        } catch (UsuarioNaoEncontradoException | UsuarioNaoAutenticadoException ex) {
+            attributes.addFlashAttribute("errorMessage", ex.getMessage());
+        } catch (RuntimeException ex) {
+            attributes.addFlashAttribute("errorMessage", "Insira uma data válida.");
+        } catch (Exception ex) {
+            attributes.addFlashAttribute("errorMessage", "Erro ao buscar agendamentos por data.");
         }
         return "redirect:/prestador/agenda";
     }
